@@ -21,13 +21,14 @@ Configuration is done via the standard .Net config file. Parameters:
 ||DefaultTitle|Title shown when the topic doesn't hold it|MQTT|
 ||IconFile|Icon shown in the taskbar|default.ico|
 
-If you want to setup a plain tcp connection in port 1883, all you need to is specify the server name.
-For SSL, specify the file containing the CA Certificate (crt format) in CaCertificateFile as well.
+If you want to setup a plain connection to an MQTT broker on port 1883, all you need to is specify the server name.
+For SSL onm port 8883, specify the file containing the CA Certificate (crt format) in CaCertificateFile as well.
 If you need to authenticate, setup a target in the Generic section of Credential Manager, and specify that target
 in CredentialsTarget.
 
 The default topic is alert/#. Two optional parameters can be used after this base: the message type and the title.
-So for example, alert/error/Office will show the error icon with the notification, and use the title Office.
+So, for example, alert/error/Office will show notification with the error icon , and use the title Office.
+
 # Release Notes
 |Date|Note|
 |---|---|
