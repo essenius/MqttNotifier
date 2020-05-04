@@ -9,15 +9,20 @@ Configuration is done via the standard .Net config file. Parameters:
 |Category|Parameter|Description|Default|
 +--------+---------+-----------+-------+
 |Broker  |MqttBroker|MQTT broker URL|mqtt|
+||MqttPort|MQTT broker port|  1883 for tcp, 8883 for ssl|
 
-|MqttPort|MQTT broker port|  1883 for tcp, 8883 for ssl
-|ClientId|unique client ID| new GUID
-|Topic|Base topic to subscribe to|alert/#
-|QoS|MQTT QoS (0, 1, 2)|2|
-|SSL|CaCertificateFile|file path of the CA certificate|null
-|ClientCertificateFile| client certificate|null
-Credentials|CredentialsTarget|Target in the Credential Store|null
-Notification|AlertDisplayTime|Time the alert stays visible|5000 (ms)
-|DefaultMessageType|Type of message: Info, Warning, Error|Warning
-|DefaultTitle|Title shown when the topic doesn't hold it|MQTT
-|IconFile|Icon shown in the taskbar|default.ico
+||ClientId|unique client ID| new GUID|
+||Topic|Base topic to subscribe to|alert/#|
+||QoS|MQTT QoS (0, 1, 2)|2|
+|SSL|CaCertificateFile|file path of the CA certificate|null|
+||ClientCertificateFile| client certificate|null|
+|Credentials|CredentialsTarget|Target in the Credential Store|null|
+|Notification|AlertDisplayTime|Time the alert stays visible|5000 (ms)|
+||DefaultMessageType|Type of message: Info, Warning, Error|Warning|
+||DefaultTitle|Title shown when the topic doesn't hold it|MQTT|
+||IconFile|Icon shown in the taskbar|default.ico|
+
+# Release Notes
+|Date|Note|
+|---|---|
+|4-May-2020|Initial release|
