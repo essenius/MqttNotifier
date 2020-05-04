@@ -12,5 +12,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("15858098-a703-461a-83fd-63a8d5a5e32f")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: InternalsVisibleTo("MqttNotifierTest")]
 
