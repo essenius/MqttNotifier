@@ -7,10 +7,9 @@ It can e.g. be used to get alerts from home automation installations.
 Configuration is done via the standard .Net config file. Parameters:
 
 |Category|Parameter|Description|Default|
-+--------+---------+-----------+-------+
+|--------|---------|-----------|-------|
 |Broker  |MqttBroker|MQTT broker URL|mqtt|
 ||MqttPort|MQTT broker port|  1883 for tcp, 8883 for ssl|
-
 ||ClientId|unique client ID| new GUID|
 ||Topic|Base topic to subscribe to|alert/#|
 ||QoS|MQTT QoS (0, 1, 2)|2|
