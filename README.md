@@ -29,6 +29,8 @@ in CredentialsTarget.
 The default topic is alert/#. Two optional parameters can be used after this base: the message type and the title.
 So, for example, alert/error/Office will show notification with the error icon , and use the title Office.
 
+I've tested it with plain connections, SSL connections and credentials. I haven't tested client certificates.
+
 # Release Notes
 |Date|Note|
 |---|---|
