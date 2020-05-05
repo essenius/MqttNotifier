@@ -9,24 +9,28 @@
 //   is distributed on an "AS IS" BASIS WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and limitations under the License.
 
-using MqttNotifier;
 using System.Windows.Forms;
+using MqttNotifier;
 
 namespace MqttNotifierTest
 {
-    internal class MockMessageHandler: MessageHandler
+    internal class MockMessageHandler : MessageHandler
     {
-        public NotifyIcon Icon { get; private set; }
-        public int Timeout { get; private set; }
-
-        protected override void TrayMessage(NotifyIcon notifyIcon, int timeout)
-        {
-            Icon = notifyIcon;
-            Timeout = timeout;
-        }
-
         public MockMessageHandler(Context context) : base(context)
         {
+        }
+
+        public ToolTipIcon Icon { get; private set; }
+        public string Message { get; private set; }
+        public int Timeout { get; private set; }
+        public string Title { get; private set; }
+
+        protected override void TrayMessage(int timeout, string title, string message, ToolTipIcon icon)
+        {
+            Timeout = timeout;
+            Title = title;
+            Message = message;
+            Icon = icon;
         }
     }
 }

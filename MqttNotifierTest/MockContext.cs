@@ -14,7 +14,7 @@ using MqttNotifier;
 
 namespace MqttNotifierTest
 {
-    class MockContext : Context
+    internal class MockContext : Context
     {
         public Dictionary<string, string> Settings { get; } = new Dictionary<string, string>();
 

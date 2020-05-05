@@ -12,7 +12,6 @@
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MqttNotifier;
 using uPLibrary.Networking.M2Mqtt;
@@ -31,12 +30,11 @@ namespace MqttNotifierTest
             var messageHandler = new MockMessageHandler(context);
             var listener = new Listener(client, null, messageHandler, context);
             Assert.IsTrue(listener.Listen(), "Listen succeeds");
-            NotifyIcon icon = null;
             try
             {
                 client.Publish("MqttNotifier/alert/info/test", Encoding.UTF8.GetBytes("Test Message"));
                 var waitCount = 0;
-                while ((icon = messageHandler.Icon) == null)
+                while (string.IsNullOrEmpty(messageHandler.Title))
                 {
                     Assert.IsTrue(waitCount++ < 5, "Acceptable wait");
                     Thread.Sleep(100);
@@ -45,9 +43,10 @@ namespace MqttNotifierTest
             finally
             {
                 listener.StopListening();
-                Assert.AreEqual("Test Message", icon?.BalloonTipText, "Message OK");
-                Assert.AreEqual("test", icon?.BalloonTipTitle, "Title OK");
+                Assert.AreEqual("Test Message", messageHandler.Message, "Message OK");
+                Assert.AreEqual("test", messageHandler.Title, "Title OK");
             }
+            messageHandler.Dispose();
         }
 
         [TestMethod, TestCategory("Fast")]
@@ -60,6 +59,7 @@ namespace MqttNotifierTest
             var credential = new NetworkCredential("user", "password");
             var listener = new Listener(client, credential, messageHandler, context);
             Assert.IsFalse(listener.Listen(), "Listen fails");
+            messageHandler.Dispose();
         }
 
         [TestMethod, TestCategory("Slow")]
@@ -72,6 +72,7 @@ namespace MqttNotifierTest
             var messageHandler = new MockMessageHandler(context);
             var listener = new Listener(client, null, messageHandler, context);
             Assert.IsFalse(listener.Listen(), "Listen fails");
+            messageHandler.Dispose();
         }
 
         [TestMethod, TestCategory("Slow")]
@@ -85,6 +86,7 @@ namespace MqttNotifierTest
             var listener = new Listener(client, null, messageHandler, context);
             // this is the slow step.
             Assert.IsFalse(listener.Listen(), "Listen fails");
+            messageHandler.Dispose();
         }
     }
 }

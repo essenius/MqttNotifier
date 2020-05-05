@@ -10,6 +10,7 @@
 //   See the License for the specific language governing permissions and limitations under the License.
 
 using System;
+
 namespace MqttNotifier
 {
     public class Program
@@ -32,6 +33,7 @@ namespace MqttNotifier
             {
                 Console.WriteLine($"Could not connect to MQTT broker '{context.MqttBroker}:{context.MqttPort}'");
             }
+            messageHandler.Dispose();
         }
     }
 }
