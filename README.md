@@ -1,8 +1,8 @@
 # MqttNotifier
-Show notifications in Windows taskbar by MQTT topic subscription
+Show notifications in Windows taskbar by [MQTT](https://mqtt.org) topic subscription
 
 This utility shows a notification in the Windows task bar for incoming MQTT messages. 
-It can e.g. be used to get alerts from home automation installations.
+It can e.g. be used to get alerts on your desktop from home automation or IoT installations.
 
 Configuration is done via the standard .Net config file. Parameters:
 
