@@ -9,7 +9,7 @@
 //   is distributed on an "AS IS" BASIS WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and limitations under the License.
 
-using System.Net.Sockets;
+using System;
 using uPLibrary.Networking.M2Mqtt;
 
 namespace MqttNotifier
@@ -27,7 +27,7 @@ namespace MqttNotifier
                 return new MqttClient(_context.MqttBroker, _context.MqttPort,
                     _context.UseSsl, _context.CaCertificate, _context.ClientCertificate, _context.SslProtocol);
             }
-            catch (SocketException)
+            catch (AggregateException)
             {
                 return null;
             }

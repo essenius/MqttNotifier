@@ -53,15 +53,15 @@ namespace MqttNotifier
             return true;
         }
 
-        public void StopListening()
-        {
-            _client.Unsubscribe(new[] { _context.Topic });
-            _client.Disconnect();
-        }
-
         private void MessageReceived(object sender, MqttMsgPublishEventArgs e)
         {
             _messageHandler.HandleMessage(Encoding.UTF8.GetString(e.Message), e.Topic);
+        }
+
+        public void StopListening()
+        {
+            _client.Unsubscribe(new[] {_context.Topic});
+            _client.Disconnect();
         }
     }
 }

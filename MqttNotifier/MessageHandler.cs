@@ -71,22 +71,13 @@ namespace MqttNotifier
 
         protected static ToolTipIcon IconFor(string messageType)
         {
-            ToolTipIcon icon;
-            switch (messageType.ToUpperInvariant())
+            var icon = messageType.ToUpperInvariant() switch
             {
-                case "INFO":
-                    icon = ToolTipIcon.Info;
-                    break;
-                case "ERROR":
-                    icon = ToolTipIcon.Error;
-                    break;
-                case "WARNING":
-                    icon = ToolTipIcon.Warning;
-                    break;
-                default:
-                    icon = ToolTipIcon.None;
-                    break;
-            }
+                "INFO" => ToolTipIcon.Info,
+                "ERROR" => ToolTipIcon.Error,
+                "WARNING" => ToolTipIcon.Warning,
+                _ => ToolTipIcon.None
+            };
             return icon;
         }
 

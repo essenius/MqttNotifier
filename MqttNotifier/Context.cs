@@ -12,7 +12,9 @@
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using MqttNotifier.Properties;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -42,7 +44,7 @@ namespace MqttNotifier
                 {
                     return result;
                 }
-                throw new InvalidEnumArgumentException("SslProtocol should be any of [none, SSLv3, TLSv1_0, TLSv1_1, TLSv1_2]");
+                throw new InvalidEnumArgumentException(Resources.SslProtocolOptions);
             }
         }
 
@@ -51,12 +53,14 @@ namespace MqttNotifier
             get
             {
                 var topic = Setting("Topic", "alert/#");
-                if (!topic.EndsWith("/#")) topic += "/#";
+                if (!topic.EndsWith("/#", StringComparison.Ordinal)) topic += "/#";
                 return topic;
             }
         }
 
         public bool UseSsl => !string.IsNullOrEmpty(CaCertificateFile);
+
+        protected virtual string AppSetting(string setting) => ConfigurationManager.AppSettings.Get(setting);
 
         protected static X509Certificate CertificateFor(string certificateFile) =>
             string.IsNullOrEmpty(certificateFile) ? null : new X509Certificate(certificateFile);
@@ -68,9 +72,7 @@ namespace MqttNotifier
             {
                 return defaultValue;
             }
-            return (T) Convert.ChangeType(settingValue, typeof(T));
+            return (T) Convert.ChangeType(settingValue, typeof(T), CultureInfo.InvariantCulture);
         }
-
-        protected virtual string AppSetting(string setting) => ConfigurationManager.AppSettings.Get(setting);
     }
 }

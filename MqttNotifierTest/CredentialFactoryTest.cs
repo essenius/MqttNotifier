@@ -28,15 +28,6 @@ namespace MqttNotifierTest
             Assert.IsNull(factory.Create());
         }
 
-        [TestMethod, TestCategory("Fast"), ExpectedException(typeof(SecurityException))]
-        public void CredentialFactoryWrongCredentialTest()
-        {
-            var context = new MockContext();
-            context.Settings.Add("CredentialsTarget", "bogus");
-            var factory = new CredentialFactory(context);
-            Assert.IsNull(factory.Create());
-        }
-
         [TestMethod, TestCategory("Fast")]
         public void CredentialFactoryRightCredentialTest()
         {
@@ -50,6 +41,15 @@ namespace MqttNotifierTest
             Assert.AreEqual("user", credentialLoaded.UserName);
             Assert.AreEqual("password", credentialLoaded.Password);
             CredentialManager.RemoveCredentials(target);
+        }
+
+        [TestMethod, TestCategory("Fast"), ExpectedException(typeof(SecurityException))]
+        public void CredentialFactoryWrongCredentialTest()
+        {
+            var context = new MockContext();
+            context.Settings.Add("CredentialsTarget", "bogus");
+            var factory = new CredentialFactory(context);
+            Assert.IsNull(factory.Create());
         }
     }
 }

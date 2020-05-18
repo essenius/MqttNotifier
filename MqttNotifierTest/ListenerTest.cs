@@ -21,7 +21,20 @@ namespace MqttNotifierTest
     [TestClass]
     public class ListenerTest
     {
-        [TestMethod, TestCategory("Fast")] 
+        [TestMethod, TestCategory("Fast")]
+        public void ListenerCredentialsFailsTest()
+        {
+            var context = new MockContext();
+            context.Settings.Add("MqttBroker", "test.mosquitto.org");
+            var client = new MqttClientFactory(context).Create();
+            var messageHandler = new MockMessageHandler(context);
+            var credential = new NetworkCredential("user", "password");
+            var listener = new Listener(client, credential, messageHandler, context);
+            Assert.IsFalse(listener.Listen(), "Listen fails");
+            messageHandler.Dispose();
+        }
+
+        [TestMethod, TestCategory("Fast")]
         public void ListenerNoCredentialsSucceedsTest()
         {
             var context = new MockContext();
@@ -49,15 +62,16 @@ namespace MqttNotifierTest
             messageHandler.Dispose();
         }
 
-        [TestMethod, TestCategory("Fast")]
-        public void ListenerCredentialsFailsTest()
+        [TestMethod, TestCategory("Slow")]
+        public void ListenerPortFailsTest()
         {
             var context = new MockContext();
             context.Settings.Add("MqttBroker", "test.mosquitto.org");
+            context.Settings.Add("MqttPort", "8889");
             var client = new MqttClientFactory(context).Create();
             var messageHandler = new MockMessageHandler(context);
-            var credential = new NetworkCredential("user", "password");
-            var listener = new Listener(client, credential, messageHandler, context);
+            var listener = new Listener(client, null, messageHandler, context);
+            // this is the slow step.
             Assert.IsFalse(listener.Listen(), "Listen fails");
             messageHandler.Dispose();
         }
@@ -71,20 +85,6 @@ namespace MqttNotifierTest
             var client = new MqttClientFactory(context).Create();
             var messageHandler = new MockMessageHandler(context);
             var listener = new Listener(client, null, messageHandler, context);
-            Assert.IsFalse(listener.Listen(), "Listen fails");
-            messageHandler.Dispose();
-        }
-
-        [TestMethod, TestCategory("Slow")]
-        public void ListenerPortFailsTest()
-        {
-            var context = new MockContext();
-            context.Settings.Add("MqttBroker", "test.mosquitto.org");
-            context.Settings.Add("MqttPort", "8889");
-            var client = new MqttClientFactory(context).Create();
-            var messageHandler = new MockMessageHandler(context);
-            var listener = new Listener(client, null, messageHandler, context);
-            // this is the slow step.
             Assert.IsFalse(listener.Listen(), "Listen fails");
             messageHandler.Dispose();
         }
