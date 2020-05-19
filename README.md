@@ -22,7 +22,7 @@ Configuration is done via the standard .Net config file. Parameters:
 ||IconFile|Icon shown in the taskbar|default.ico|
 
 If you want to setup a plain connection to an MQTT broker on port 1883, all you need to is specify the server name.
-For SSL onm port 8883, specify the file containing the CA Certificate (crt format) in CaCertificateFile as well.
+For SSL on port 8883, specify the file containing the CA Certificate (crt format) in CaCertificateFile as well.
 If you need to authenticate, setup a target in the Generic section of Credential Manager, and specify that target
 in CredentialsTarget.
 
