@@ -32,6 +32,7 @@ So, for example, alert/error/Office will show notification with the error icon ,
 I've tested it with plain connections, SSL connections and credentials. I haven't tested client certificates.
 
 # Release Notes
-|Date|Note|
-|---|---|
-|4-May-2020|Initial release|
+|Version|Date|Note|
+|---|---|---|
+|1.0.0|4-May-2020|Initial release|
+|1.0.1|19-May-2020|Migration to .Net Core|
