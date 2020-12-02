@@ -22,7 +22,7 @@ Configuration is done via the standard .Net config file. Parameters:
 ||IconFile|Icon shown in the taskbar|default.ico|
 
 If you want to setup a plain connection to an MQTT broker on port 1883, all you need to is specify the server name.
-For SSL onm port 8883, specify the file containing the CA Certificate (crt format) in CaCertificateFile as well.
+For SSL on port 8883, specify the file containing the CA Certificate (crt format) in CaCertificateFile as well.
 If you need to authenticate, setup a target in the Generic section of Credential Manager, and specify that target
 in CredentialsTarget.
 
@@ -32,6 +32,7 @@ So, for example, alert/error/Office will show notification with the error icon ,
 I've tested it with plain connections, SSL connections and credentials. I haven't tested client certificates.
 
 # Release Notes
-|Date|Note|
-|---|---|
-|4-May-2020|Initial release|
+|Version|Date|Note|
+|---|---|---|
+|1.0.0|4-May-2020|Initial release|
+|1.0.1|19-May-2020|Migration to .Net Core|
