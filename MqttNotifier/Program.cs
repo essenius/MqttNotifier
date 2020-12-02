@@ -5,6 +5,7 @@ namespace MqttNotifier
 {
     public static class Program
     {
+        [STAThread]
         public static void Main()
         {
             var context = new Context();

@@ -9,6 +9,7 @@
 //   is distributed on an "AS IS" BASIS WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and limitations under the License.
 
+using System;
 using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using uPLibrary.Networking.M2Mqtt;
@@ -32,7 +33,7 @@ namespace MqttNotifierTest
             Assert.AreEqual(MqttSslProtocols.TLSv1_2, context.SslProtocol, "with ssl, SslProtocol is TLSv1_2");
         }
 
-        [TestMethod, TestCategory("Fast"), ExpectedException(typeof(InvalidEnumArgumentException))]
+        [TestMethod, TestCategory("Fast"), ExpectedException(typeof(InvalidOperationException))]
         public void ContextWrongSslOptionTest()
         {
             var context = new MockContext();

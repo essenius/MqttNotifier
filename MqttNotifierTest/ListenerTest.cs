@@ -21,11 +21,16 @@ namespace MqttNotifierTest
     [TestClass]
     public class ListenerTest
     {
+        // Mosquitto test server: test.mosquitto.org:8883
+        // Alternative is running a local Mosquitto, e.g. via a Docker image.
+        private const string MosquittoServer = "localhost";
+        private const string MosquittoWrongPort = "8883";
+
         [TestMethod, TestCategory("Fast")]
         public void ListenerCredentialsFailsTest()
         {
             var context = new MockContext();
-            context.Settings.Add("MqttBroker", "test.mosquitto.org");
+            context.Settings.Add("MqttBroker", MosquittoServer);
             var client = new MqttClientFactory(context).Create();
             var messageHandler = new MockMessageHandler(context);
             var credential = new NetworkCredential("user", "password");
@@ -39,7 +44,7 @@ namespace MqttNotifierTest
         {
             var context = new MockContext();
             context.Settings.Add("Topic", "MqttNotifier/alert/#");
-            var client = new MqttClient("test.mosquitto.org");
+            var client = new MqttClient(MosquittoServer);
             var messageHandler = new MockMessageHandler(context);
             var listener = new Listener(client, null, messageHandler, context);
             Assert.IsTrue(listener.Listen(), "Listen succeeds");
@@ -66,8 +71,8 @@ namespace MqttNotifierTest
         public void ListenerPortFailsTest()
         {
             var context = new MockContext();
-            context.Settings.Add("MqttBroker", "test.mosquitto.org");
-            context.Settings.Add("MqttPort", "8889");
+            context.Settings.Add("MqttBroker", MosquittoServer);
+            context.Settings.Add("MqttPort", MosquittoWrongPort); 
             var client = new MqttClientFactory(context).Create();
             var messageHandler = new MockMessageHandler(context);
             var listener = new Listener(client, null, messageHandler, context);

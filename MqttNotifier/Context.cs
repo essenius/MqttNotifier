@@ -44,7 +44,7 @@ namespace MqttNotifier
                 {
                     return result;
                 }
-                throw new InvalidEnumArgumentException(Resources.SslProtocolOptions);
+                throw new InvalidOperationException(Resources.SslProtocolOptions);
             }
         }
 
